@@ -1,16 +1,14 @@
-data "azurerm_client_config" "current" {} # data.azurerm_client_config.current.tenant_id
-variable "email_address" {}
-
 module "private-pubsub" {
-  source                                  = "../"
+  source  = "TheDataPlatform/private-pubsub/azurerm"
+  version = "0.0.1"
   providers = {
     azurerm.hub                           = azurerm.hub
     azurerm.spoke                         = azurerm.spoke
   }
   tenant_id                               = data.azurerm_client_config.current.tenant_id
   principal_id                            = data.azurerm_client_config.current.object_id # for key vault management
-  resource_group_name                     = "sandbox-rg"
-  resource_group_name_hub                 = "hub-rg"
+  resource_group_name                     = local.spoke_rg_name
+  resource_group_name_hub                 = local.hub_rg_name
 
   # Storage Account Networking
   whitelist_ip_addresses                  = [ local.current_ip_address ] # list of ip addresses
