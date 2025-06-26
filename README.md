@@ -20,7 +20,7 @@ All resources will be private endpointed and deployed to a spoke.  We will refer
 - app insights
 - key vault for storing connection strings
 
-# Potential Enhancesment
+# Potential Enhancement
 
 - eventgrid
 - storage queue for enhanced event driven architecture
